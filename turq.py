@@ -685,6 +685,9 @@ class TurqHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         for rule in self.rules:
             if rule.matches(req):
                 rule.apply(req, resp)
+                break
+        else:
+            resp.status = 404
         
         # Server and Date headers need special casing
         if 'Server' in resp.headers:
